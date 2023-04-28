@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://lightning.warnermediacdn.com/cdp/psmtk/getcdpid.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <script>
+            // Utils
+            function generateUUID() {
+                var cryptoLib = window.crypto || window.msCrypto; // 1 in 2^^122 chance of collision with this algorithm
+                return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, function (c) {
+                    return (c ^ cryptoLib.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
+                });
+            }
+
+            function setCookie(cookieName, cookieValue, expDays) {
+                var domain = window.location.hostname.split('.').slice(-2).join('.');
+                console.log ("[PTK] setting", cookieName, "to", cookieValue, "on domain", domain)
+                var expires = new Date(Date.now() + expDays * 24 * 60 * 60 * 1000).toUTCString();
+                console.log("[PTK] expires", expires);
+                document.cookie = cookieName + "=" + cookieValue + "; expires=" + expires + "; domain=" + domain + "; path=/; SameSite=None; Secure";                
+            }
+
+            function getCookie(cookieName) {
+                var match = document.cookie.match(new RegExp('(^| )' + cookieName + '=([^;]+)'));
+                if (match) {
+                    return match[2];
+                } else {
+                    return 0;
+                } 
+            }
+        </script>
+    </head>
+
+    <body data-new-gr-c-s-check-loaded="14.1029.0" data-gr-ext-installed="">
+        <h1>iFrame Loaded</h1>
+
+        <script>
+            var cdpId;
+            console.log("[PTK] cookies", document.cookie);
+            if ( getCookie('CDPID') == 0 ) {
+                cdpId = generateUUID();
+                console.log( "[PTK] cdpId", cdpId );
+                console.log("[PTK] setting cookie in iFrame");
+                setCookie('CDPID', cdpId, 3650); //10 yrs
+                window.parent.postMessage(cdpId, '*');
+            } else {
+                console.log("[PTK] getting cookie in iFrame");
+                cdpId = getCookie('CDPID');
+                console.log("[PTK] cdpId", cdpId);
+                window.parent.postMessage(cdpId, '*');
+            }
+        </script>
+    
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+  div.grammarly-desktop-integration {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+
+  div.grammarly-desktop-integration:before {
+    content: attr(data-content);
+  }
+</style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

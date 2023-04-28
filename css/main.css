@@ -1,0 +1,22 @@
+body 
+{
+    color: aliceblue;
+    Font: Monaco
+}
+table
+{
+
+    color:brown
+
+}
+.background1
+{ 
+background-size: 200%;  
+background-repeat: no-repeat;
+background-image: cover;
+background-image: "images/bluemoon_small.jpg" 
+  }
+block
+{
+    display: block;
+}
